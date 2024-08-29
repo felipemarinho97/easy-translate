@@ -32,6 +32,38 @@ def similarity(str1, str2):
     # return 1 - (distance(str1, str2) / min(len(str1), len(str2)))
     return SequenceMatcher(None, str1, str2).ratio()
 
+
+def local_translate(text, source_lang, target_lang):
+    output = {"target_lang": target_lang, "source_lang": source_lang}
+    target_lang = target_lang.lower()
+    source_lang = source_lang.lower()
+    if "portuguese" in target_lang:
+        tlang = "pt"
+    elif "spanish" in target_lang:
+        tlang = "es"
+    elif "english" in target_lang:
+        tlang = "en"
+    elif "chinese" in target_lang:
+        tlang = "zh"
+    
+    if "portuguese" in source_lang:
+        slang = "pt"
+    elif "spanish" in source_lang:
+        slang = "es"
+    elif "english" in source_lang:
+        slang = "en"
+    elif "chinese" in source_lang:
+        slang = "zh"
+
+    translator = EasyGoogleTranslate(
+        source_language=slang,
+        target_language=tlang,
+        timeout=10
+    )
+    result = translator.translate(text)
+
+    return result
+
 # function to determine if the output is positive
 def is_positive(text):
     lower_text = text.lower()
@@ -127,6 +159,12 @@ def call_model_batch(system_prompt, user_prompt, assistant_prompt=None, model_id
 
 # Function to translate a dialogue from source language to target language
 def translate_call(text, source_lang, target_lang):
+    # split the texts by the break line
+    texts = text.split('\n')
+    # add delimiter to separate texts
+    texts = [f"{delimiter1}{text}{delimiter2}" for text in texts]
+    # join the texts
+    text = "\n".join(texts)
     system_prompt = f"""Translate the following dialogues from {source_lang} to {target_lang}.
 Rules:
 Ensure that the translation captures the tone, context, and nuances of the original dialogue.
@@ -137,7 +175,11 @@ Use the separator {delimiter1} and {delimiter2} to separate the dialogues.
 """
     assistant_prompt = f"""Here is the translation of the dialog from {source_lang} to {target_lang}:"""
 
-    return call_model(system_prompt, text, assistant_prompt, model_id=MODEL_ID)
+    result = call_model(system_prompt, text, assistant_prompt, model_id=MODEL_ID)
+
+    # remove delimiter from the texts
+    result = result.replace(delimiter1, "").replace(delimiter2, "")
+    return result
 
 # function to determine if the language is target
 def is_target_lang(lang, text):
@@ -196,8 +238,6 @@ def translate():
 
     # §
 
-    # add delimiter to separate texts
-    texts = [f"{delimiter1}{text}{delimiter2}" for text in texts]
     # join texts to a single string
     texts = "\n".join(texts)
 
@@ -219,9 +259,6 @@ def translate():
 
     # convert the translated text back to a list
     translated_texts = translated_text.split('\n')
-    # remove delimiter from the texts
-    translated_texts = [text.replace(delimiter1, "") for text in translated_texts]
-    translated_texts = [text.replace(delimiter2, "") for text in translated_texts]
 
     # filter out empty trimmed texts
     translated_texts = [text for text in translated_texts if text.strip()]
@@ -231,7 +268,7 @@ def translate():
     original_texts = [text.replace(delimiter2, "") for text in original_texts]
 
     # align the reference and translated texts
-    refer, trans = alinhar_listas(reference_texts, translated_texts)
+    _, trans = alinhar_listas(reference_texts, translated_texts)
 
     orig = original_texts
     # if source is chinese, skip alignment
