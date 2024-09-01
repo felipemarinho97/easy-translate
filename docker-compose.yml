@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  translator-api:
+    build: .
+    ports:
+      - "24080:24080"
+    environment:
+      - MODEL=gpt-4o-mini  # or whichever model ID you want to set
+      - USER_CONFIRMATION=False
+    volumes:
+      - .:/app
