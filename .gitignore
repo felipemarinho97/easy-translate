@@ -1,3 +1,7 @@
 venv/*
-__pycahe__/*
+**/__pycache__/*
 cached/*
+*.json
+*.jsonl
+*.srt
+.env
