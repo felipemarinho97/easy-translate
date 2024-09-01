@@ -2,11 +2,14 @@ version: '3.8'
 
 services:
   translator-api:
-    build: .
+    build:
+      context: easy-translate
+      dockerfile: Dockerfile
     ports:
       - "24080:24080"
     environment:
       - MODEL=gpt-4o-mini  # or whichever model ID you want to set
-      - USER_CONFIRMATION=False
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - USER_CONFIRMATION=
     volumes:
       - .:/app
