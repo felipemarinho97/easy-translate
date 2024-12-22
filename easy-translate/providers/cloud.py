@@ -30,7 +30,6 @@ def google_translate(texts, source_lang, target_lang, max_chars=5000):
     for batch in batch_texts(texts, max_chars):
         text_to_translate = '\n'.join(batch)
         translated_text = translator.translate(text_to_translate)
-        print(f"Translated: {translated_text}")
         result.extend(translated_text.split("\n"))
 
     return result
