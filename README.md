@@ -31,6 +31,12 @@ python translate_srt.py input_file.srt output_file.srt 'zh-CN' 'pt-br' --server_
 
 This command will translate the input file from Chinese `zh-CN` to Brazilian Portuguese `pt-br` using the EasyNMT server running at `http://localhost:24080`. The translated subtitles will be saved to the output file.
 
+## Batch Size
+
+In the example above, the `--batch_size` is set to 100. This means that the script will send 100 lines of the subtitle file to the server for translation in each request.
+
+Using a larger batch size can speed up the translation process. However, some models may return bad or incomplete translations when the batch size is too large. You can adjust the batch size using the `--batch_size` option. I recommend using a **maximum** batch of size `50` for less capable models like `gpt-4o-mini` and `100` for more capable models ones.
+
 ## Command Help
 
 ```
