@@ -2,10 +2,19 @@ import os
 from batch import call_model_openai_batch
 from openai import OpenAI
 
+custom_endpoint = os.getenv("OPENAI_CUSTOM_ENDPOINT")
+custom_endpoint = f"{custom_endpoint}/v1" if custom_endpoint else None
+
 # Initialize the OpenAI API
 openai_client = OpenAI(
     api_key = os.getenv("OPENAI_API_KEY")
 )
+
+if custom_endpoint:
+    openai_client = OpenAI(
+        api_key = os.getenv("OPENAI_API_KEY"),
+        base_url = custom_endpoint
+    )
 
 def call_model_openai(system_prompt, user_prompt, assistant_prompt=None, model_id=None, max_tokens=4096, temperature=0.2, top_p=0.9):
     try:
