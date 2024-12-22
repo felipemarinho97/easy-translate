@@ -1,3 +1,15 @@
+# Easy Translate
+
+Easy Translate is a tool to translate subtitles using AI models. This repo contains a server that is compatible with EasyNMT API and can be used as a drop-in replacement for EasyNMT.
+
+## Supported Providers
+
+For now, the server supports the following providers:
+- OpenAI
+- Amazon Bedrock
+
+You can also use any OpenAI compatible server as a provider like an LiteLLM server.
+
 # Configuring EasyNMT Server
 
 Create a `.env` file inside the `easy-translate` directory. You can copy the `.env.example` file and rename it to `.env`.
