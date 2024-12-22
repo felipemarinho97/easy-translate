@@ -86,6 +86,6 @@ languages = [
 
 def get_language(code):
     for lang in languages:
-        if lang["code"] == code:
+        if lang["code"].lower() == code.lower():
             return lang
     raise ValueError("Language not found")

@@ -22,7 +22,8 @@ def translate():
     try:
         trans, source_lang, target_lang = translate_texts(texts, source_lang_code, target_lang_code)
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        print(f"translate_texts failed: {str(e)}")
+        return jsonify({"error": f"translate_texts failed: {str(e)}"}), 500
 
     response = {
         "target_lang": target_lang,
