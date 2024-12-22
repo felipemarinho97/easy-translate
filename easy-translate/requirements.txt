@@ -2,7 +2,6 @@ flask
 requests
 boto3
 numpy
-easynmt
 langdetect
 tqdm
 python-dotenv

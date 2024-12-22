@@ -1,3 +1,6 @@
 *.jsonl
 *.srt
 .env
+__pycache__
+cached
+venv

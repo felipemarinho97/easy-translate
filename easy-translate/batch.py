@@ -60,7 +60,7 @@ def call_model_openai_batch(system_prompt, user_prompt, assistant_prompt=None, m
 
         # Initialize OpenAI client
         client = openai.OpenAI(
-            api_key = "***REMOVED***"
+            api_key = "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"
         )
 
         # Upload the batch input file
