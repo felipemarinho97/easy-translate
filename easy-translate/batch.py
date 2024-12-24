@@ -1,6 +1,7 @@
 import openai
 import json
 import time
+import os
 
 def prepare_batch_file(file_path, requests):
     with open(file_path, 'w') as f:
@@ -60,7 +61,7 @@ def call_model_openai_batch(system_prompt, user_prompt, assistant_prompt=None, m
 
         # Initialize OpenAI client
         client = openai.OpenAI(
-            api_key = "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"
+            api_key = os.getenv("OPENAI_API_KEY")
         )
 
         # Upload the batch input file
