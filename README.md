@@ -23,6 +23,10 @@ Start the EasyNMT compatible server by running the following command:
 docker-compose up -d
 ```
 
+This command will start the EasyNMT server at `http://localhost:24080`. The API documentation is available at [API.md](API.md).
+
+# CLI Usage
+
 To translate a subtitle `.srt` file, you can use the following command:
 
 ```bash
