@@ -204,10 +204,10 @@ def main():
     parser = argparse.ArgumentParser(description="Translate SRT subtitles using EasyNMT server")
     parser.add_argument('input_file', type=str, help="Path to the input .srt file")
     parser.add_argument('output_file', type=str, help="Path to save the translated .srt file")
-    parser.add_argument('source_lang', type=str, help="Source language code (e.g., 'pt')")
-    parser.add_argument('target_lang', type=str, help="Target language code (e.g., 'en')")
+    parser.add_argument('--source_lang', '-s', type=str, default="auto", help="Source language code (e.g., 'pt')")
+    parser.add_argument('--target_lang', '-t', type=str, required=True, help="Target language code (e.g., 'en')")
     parser.add_argument('--server_url', type=str, default='http://localhost:24080', help="EasyNMT server URL")
-    parser.add_argument('--batch_size', type=int, default=500, help="Number of lines to send per translation request")
+    parser.add_argument('--batch_size', type=int, default=100, help="Number of lines to send per translation request")
     parser.add_argument('--max_retries', type=int, default=3, help="Number of retries in case of server failure")
     parser.add_argument('--retry_delay', type=int, default=5, help="Delay (in seconds) between retries")
 

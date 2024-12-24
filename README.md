@@ -26,10 +26,11 @@ docker-compose up -d
 To translate a subtitle `.srt` file, you can use the following command:
 
 ```bash
-python translate_srt.py input_file.srt output_file.srt 'zh-CN' 'pt-br' --server_url http://localhost:24080 --max_retries 1 --batch_size 100
+python translate_srt.py input_file.srt output_file.srt -s 'zh-CN' -t 'pt-br' --server_url http://localhost:24080 --max_retries 1 --batch_size 100
 ```
 
 This command will translate the input file from Chinese `zh-CN` to Brazilian Portuguese `pt-br` using the EasyNMT server running at `http://localhost:24080`. The translated subtitles will be saved to the output file.
+You can also omit the `-s` or `--source_lang` option to automatically detect the source language.
 
 ## Batch Size
 
@@ -40,18 +41,20 @@ Using a larger batch size can speed up the translation process. However, some mo
 ## Command Help
 
 ```
-usage: translate_srt.py [-h] [--server_url SERVER_URL] [--batch_size BATCH_SIZE] [--max_retries MAX_RETRIES] [--retry_delay RETRY_DELAY] input_file output_file source_lang target_lang
+usage: translate_srt.py [-h] [--source_lang SOURCE_LANG] [--target_lang TARGET_LANG] [--server_url SERVER_URL] [--batch_size BATCH_SIZE] [--max_retries MAX_RETRIES] [--retry_delay RETRY_DELAY] input_file output_file
 
 Translate SRT subtitles using EasyNMT server
 
 positional arguments:
   input_file            Path to the input .srt file
   output_file           Path to save the translated .srt file
-  source_lang           Source language code (e.g., 'pt')
-  target_lang           Target language code (e.g., 'en')
 
 options:
   -h, --help            show this help message and exit
+  --source_lang, -s SOURCE_LANG
+                        Source language code (e.g., 'pt')
+  --target_lang, -t TARGET_LANG
+                        Target language code (e.g., 'en')
   --server_url SERVER_URL
                         EasyNMT server URL
   --batch_size BATCH_SIZE
