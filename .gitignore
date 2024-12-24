@@ -1,0 +1,9 @@
+*.jsonl
+*.srt
+.env
+*.sh
+*.txt
+__pycache__
+cached
+**/venv
+**/.venv

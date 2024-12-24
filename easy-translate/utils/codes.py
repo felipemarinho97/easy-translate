@@ -1,4 +1,5 @@
 languages = [
+    {"code": "auto", "name": "Auto", "flag": "🌐", "englishName": "Auto"},
     {"code": "af", "name": "Afrikaans", "flag": "🇿🇦", "englishName": "Afrikaans"},
     {"code": "sq", "name": "Shqip", "flag": "🇦🇱", "englishName": "Albanian"},
     {"code": "am", "name": "አማርኛ", "flag": "🇪🇹", "englishName": "Amharic"},

@@ -3,7 +3,7 @@ import json
 from botocore.exceptions import ClientError
 
 # Initialize boto3 client for Bedrock
-client = boto3.client('bedrock-runtime', region_name='us-west-2')  # Adjust region as needed
+client = boto3.client('bedrock-runtime')  # Adjust region as needed
 
 # Function to call Amazon Bedrock API using boto3
 def call_model_bedrock(system_prompt, user_prompt, assistant_prompt, model_id="meta.llama3-1-8b-instruct-v1:0", max_gen_len=2048, temperature=0.2, top_p=0.9):

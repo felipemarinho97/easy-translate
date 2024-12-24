@@ -21,7 +21,7 @@ def google_translate(texts, source_lang, target_lang, max_chars=5000):
 
     result = []
     translator = EasyGoogleTranslate(
-        source_language=source_lang.split("-")[0],
+        source_language=source_lang.split("-")[0] if source_lang != "auto" else "",
         target_language=target_lang.split("-")[0],
         timeout=10
     )
